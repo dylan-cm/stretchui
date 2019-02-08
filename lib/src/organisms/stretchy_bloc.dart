@@ -2,40 +2,41 @@ import 'dart:math' as math;
 import 'package:rxdart/rxdart.dart';
 import 'package:flutter/material.dart';
 import '../bloc_provider.dart';
+import '../atoms/param.dart';
+export '../atoms/param.dart';
 
 class StretchyBloc extends BlocBase{
-  final _sizeSubject = BehaviorSubject<Size>(seedValue: Size(100, 100));
+  final _paramSubject = BehaviorSubject<Param>(seedValue: Param(100, 100, 0, 0, Colors.white));
   //TODO: paddingSubject exterior and interior
   //TODO: rotation
   //TODO: position relative to screen
   
   //Getters
-  ValueObservable<Size> get sizeStream => _sizeSubject.stream;
-  double get width => _abs(sizeStream.value.width);
-  double get height => _abs(sizeStream.value.height);
+  ValueObservable<Param> get paramStream => _paramSubject.stream;
+  double get width => _abs(paramStream.value.width);
+  double get height => _abs(paramStream.value.height);
   //Setters
   Function(double) get setWidth => (dx) {
-    _sizeSubject.sink.add(
-      Size(sizeStream.value.width+dx*2, sizeStream.value.height)
+    _paramSubject.sink.add(
+      paramStream.value.alter(width: paramStream.value.width+dx*2)
     );
   };
   Function(double) get setHeight => (dy) {
-    _sizeSubject.sink.add(
-      Size(sizeStream.value.width, sizeStream.value.height+dy*2)
+    _paramSubject.sink.add(
+      paramStream.value.alter(height: paramStream.value.height+dy*2)
     );
   };
   Function() get endResize => (){
-    _sizeSubject.sink.add(
-      Size(
-        _abs(_sizeSubject.stream.value.width), 
-        _abs(_sizeSubject.stream.value.height) 
+    _paramSubject.sink.add(
+      paramStream.value.alter(
+        width: _abs(_paramSubject.stream.value.width), 
+        height: _abs(_paramSubject.stream.value.height) 
       )
     );
   };
 
   void dispose() { 
-    _sizeSubject.close();
-    // _invertedSubject.close();
+    _paramSubject.close();
   }
 
   double _abs(double value) => math.sqrt( math.pow(value, 2) );

@@ -20,10 +20,10 @@ class StretchyBox extends StatelessWidget{
     final bloc = StretchyBloc();
     return BlocProvider<StretchyBloc>(
       bloc: bloc,
-      child: StreamBuilder(
-        stream: bloc.sizeStream,
-        initialData: Size(100,100),
-        builder: (context, AsyncSnapshot<Size> snapshot){ 
+      child: StreamBuilder<Param>(
+        stream: bloc.paramStream,
+        initialData: Param.start(),
+        builder: (context, AsyncSnapshot<Param> snapshot){ 
           return Stack(
             alignment: AlignmentDirectional.center,
             children: <Widget>[
