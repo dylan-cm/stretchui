@@ -83,21 +83,72 @@ class StretchyBox extends StatelessWidget{
 
 class BoxFrame extends StatelessWidget {
   final double extPadding, intPadding, width, height;
+  final Color color;
   //TODO: implement padding manipulation
   BoxFrame({
     this.extPadding:0, 
     this.intPadding:0, 
     this.width:100, 
-    this.height:100
+    this.height:100,
+    this.color:Colors.black87,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        border: Border.all(),
+    return Stack(
+      overflow: Overflow.visible,
+      alignment: AlignmentDirectional.center,
+      children: <Widget>[
+        Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            border: Border.all(color: color),
+          ),
+        ),
+        Positioned(
+          top: -5,
+          child: SizeManipulator(color: color,),
+        ),
+        Positioned(
+          right: -5,
+          child: RotatedBox(
+            quarterTurns: 1,
+            child: SizeManipulator(color: color,),
+          )
+        ),
+        Positioned(
+          left: -5,
+          child: RotatedBox(
+            quarterTurns: 3,
+            child: SizeManipulator(color: color,),
+          )
+        ),
+        Positioned(
+          bottom: -5,
+          child: RotatedBox(
+            quarterTurns: 2,
+            child: SizeManipulator(color: color,),
+          )
+        ),
+      ]
+    );
+  }
+}
+
+class SizeManipulator extends StatelessWidget{
+  final Color color;
+  SizeManipulator({this.color : Colors.black87});
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Container(
+        width: 22,
+        height: 11,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(2.0)),
+          color: color,
+        ),
       ),
     );
   }
