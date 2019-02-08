@@ -21,6 +21,10 @@ class BoxFrame extends StatelessWidget {
       alignment: AlignmentDirectional.center,
       children: <Widget>[
         Container(
+          width: width+44,
+          height: height+44,
+        ),
+        Container(
           width: width,
           height: height,
           decoration: BoxDecoration(
@@ -28,19 +32,19 @@ class BoxFrame extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: -5,
+          top: 0,
           child: HeightManipulator.top(color: color,),
         ),
         Positioned(
-          right: -5,
+          right: 0,
           child: WidthManipulator.right(color: color,),
         ),
         Positioned(
-          bottom: -5,
+          bottom: 0,
           child: HeightManipulator.bottom(color: color,),
         ),
         Positioned(
-          left: -5,
+          left: 0,
           child: WidthManipulator.left(color: color,),
         ),
       ]

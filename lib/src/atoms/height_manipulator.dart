@@ -15,11 +15,19 @@ class HeightManipulator extends StatelessWidget{
     return GestureDetector(
       onVerticalDragUpdate: (details) => _onDragUpdate(details, bloc),
       child: Container(
-        width: 22,
-        height: 11,
+        alignment: Alignment(0, 0),
+        width: 44,
+        height: 44,
         decoration: BoxDecoration(
+          color: color.withOpacity(0.0),
+          ),
+        child: Container(
+          width: 22,
+          height: 11,
+          decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(2.0)),
           color: color,
+          ),
         ),
       ),
     );

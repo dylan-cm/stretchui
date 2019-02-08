@@ -15,11 +15,19 @@ class WidthManipulator extends StatelessWidget{
     return GestureDetector(
       onHorizontalDragUpdate: (details) => _onDragUpdate(details, bloc),
       child: Container(
-        width: 11,
-        height: 22,
+        alignment: Alignment(0, 0),
+        width: 44,
+        height: 44,
         decoration: BoxDecoration(
+          color: color.withOpacity(0.0),
+          ),
+        child: Container(
+          width: 11,
+          height: 22,
+          decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(2.0)),
           color: color,
+          ),
         ),
       ),
     );
