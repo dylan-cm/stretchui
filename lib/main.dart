@@ -46,25 +46,58 @@ class StretchyBox extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Stack(
       alignment: AlignmentDirectional.center,
-      color: Theme.of(context).primaryColorLight,
-      padding: EdgeInsets.all(extPadding),
-      width: width+extPadding,
-      height: height+extPadding,
-        child: Container(
-        alignment: AlignmentDirectional.center,
-        color: Theme.of(context).primaryColor,
-        padding: EdgeInsets.all(intPadding),
-        width: width,
-        height: height,
-        child: Container(
+      children: <Widget>[
+        Container(
           alignment: AlignmentDirectional.center,
-          color: Theme.of(context).primaryColorDark,
-          padding: EdgeInsets.all(intPadding),
-          width: width-intPadding,
-          height: height-intPadding,
-        )
+          color: Theme.of(context).primaryColorLight,
+          padding: EdgeInsets.all(extPadding),
+          width: width+extPadding*2,
+          height: height+extPadding*2,
+            child: Container(
+            alignment: AlignmentDirectional.center,
+            // color: Theme.of(context).primaryColor,
+            padding: EdgeInsets.all(intPadding),
+            width: width,
+            height: height,
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              // border: Border.all()
+            ),
+            child: Container(
+              alignment: AlignmentDirectional.center,
+              color: Theme.of(context).primaryColorDark,
+              //This is where a child would go instead 
+            )
+          )
+        ),
+        BoxFrame(
+          width: width,
+          height: height,
+        ),
+      ]
+    );
+  }
+}
+
+class BoxFrame extends StatelessWidget {
+  final double extPadding, intPadding, width, height;
+  //TODO: implement padding manipulation
+  BoxFrame({
+    this.extPadding:0, 
+    this.intPadding:0, 
+    this.width:100, 
+    this.height:100
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        border: Border.all(),
       ),
     );
   }
