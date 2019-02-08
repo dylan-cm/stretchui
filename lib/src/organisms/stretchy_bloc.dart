@@ -11,8 +11,8 @@ class StretchyBloc extends BlocBase{
   
   //Getters
   ValueObservable<Size> get sizeStream => _sizeSubject.stream;
-  double get width => sizeStream.value.width;
-  double get height => sizeStream.value.height;
+  double get width => math.sqrt( math.pow(sizeStream.value.width, 2) );
+  double get height => math.sqrt( math.pow(sizeStream.value.height, 2) );
   //Setters
   Function(double) get setWidth => (dx) {
     _sizeSubject.sink.add(
