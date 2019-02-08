@@ -1,12 +1,11 @@
 import 'dart:math' as math;
 import 'package:rxdart/rxdart.dart';
-import 'package:flutter/material.dart';
 import '../bloc_provider.dart';
 import '../atoms/param.dart';
 export '../atoms/param.dart';
 
 class StretchyBloc extends BlocBase{
-  final _paramSubject = BehaviorSubject<Param>(seedValue: Param(100, 100, 0, 0, Colors.white));
+  final _paramSubject = BehaviorSubject<Param>(seedValue: Param.start());
   //TODO: paddingSubject exterior and interior
   //TODO: rotation
   //TODO: position relative to screen
@@ -17,13 +16,19 @@ class StretchyBloc extends BlocBase{
   double get height => _abs(paramStream.value.height);
   //Setters
   Function(double) get setWidth => (dx) {
-    _paramSubject.sink.add(
+    if(-1.0 <= width && width <= 1.0) _paramSubject.sink.add(
       paramStream.value.alter(width: paramStream.value.width+dx*2)
+    );
+    else _paramSubject.sink.add(
+      paramStream.value.alter(width: 1.0)
     );
   };
   Function(double) get setHeight => (dy) {
-    _paramSubject.sink.add(
+    if(-1.0 <= height && height <= 1.0) _paramSubject.sink.add(
       paramStream.value.alter(height: paramStream.value.height+dy*2)
+    );
+    else _paramSubject.sink.add(
+      paramStream.value.alter(height: 1.0)
     );
   };
   Function() get endResize => (){

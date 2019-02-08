@@ -13,8 +13,8 @@ class HeightManipulator extends StatelessWidget{
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<StretchyBloc>(context);
     return GestureDetector(
-      onVerticalDragUpdate: (details) => _onDragUpdate(details, bloc),
-      onVerticalDragEnd: (details) => _onDragEnd(details, bloc),
+      onVerticalDragUpdate: (details) => _onDragUpdate(context, details, bloc),
+      onVerticalDragEnd: (details) => _onDragEnd( details, bloc),
       child: Container(
         alignment: Alignment(0, 0),
         width: 44,
@@ -34,8 +34,8 @@ class HeightManipulator extends StatelessWidget{
     );
   }
 
-  void _onDragUpdate(DragUpdateDetails details, StretchyBloc bloc){
-    bloc.setHeight(sign*details.delta.dy);
+  void _onDragUpdate(BuildContext context, DragUpdateDetails details, StretchyBloc bloc){
+    bloc.setHeight(sign*details.delta.dy/MediaQuery.of(context).size.height);
   }
 
   void _onDragEnd(DragEndDetails details, StretchyBloc bloc){

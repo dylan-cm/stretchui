@@ -7,8 +7,8 @@ class Param{
 
   Param(this.width, this.height, this.extPadding, this.intPadding, this.color);
   Param.start({
-    this.width:100, 
-    this.height:100, 
+    this.width:0.1, 
+    this.height:0.1, 
     this.extPadding:0, 
     this.intPadding:0, 
     this.color:Colors.white

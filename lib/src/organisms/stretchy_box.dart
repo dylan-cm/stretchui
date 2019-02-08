@@ -18,6 +18,7 @@ class StretchyBox extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final bloc = StretchyBloc();
+    final screen = MediaQuery.of(context).size;
     return BlocProvider<StretchyBloc>(
       bloc: bloc,
       child: StreamBuilder<Param>(
@@ -31,14 +32,14 @@ class StretchyBox extends StatelessWidget{
                 alignment: AlignmentDirectional.center,
                 color: Theme.of(context).primaryColorLight,
                 padding: EdgeInsets.all(extPadding),
-                width: bloc.width+extPadding*2,
-                height: bloc.height+extPadding*2,
+                width: bloc.width*screen.width + extPadding*2,
+                height: bloc.height*screen.height + extPadding*2,
                   child: Container(
                   alignment: AlignmentDirectional.center,
                   color: Theme.of(context).primaryColor,
                   padding: EdgeInsets.all(intPadding),
-                  width: bloc.width,
-                  height: bloc.height,
+                  width: bloc.width*screen.width, 
+                  height: bloc.height*screen.height, 
                   child: Container(
                     alignment: AlignmentDirectional.center,
                     color: Theme.of(context).primaryColorDark,
@@ -47,8 +48,8 @@ class StretchyBox extends StatelessWidget{
                 )
               ),
               BoxFrame(
-                width: bloc.width,
-                height: bloc.height,
+                width: bloc.width*screen.width, 
+                height: bloc.height*screen.height, 
               ),
             ]
           );
