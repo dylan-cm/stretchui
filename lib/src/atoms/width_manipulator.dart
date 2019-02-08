@@ -14,6 +14,7 @@ class WidthManipulator extends StatelessWidget{
     final bloc = BlocProvider.of<StretchyBloc>(context);
     return GestureDetector(
       onHorizontalDragUpdate: (details) => _onDragUpdate(details, bloc),
+      onHorizontalDragEnd: (details)=> _onDragEnd(details, bloc),
       child: Container(
         alignment: Alignment(0, 0),
         width: 44,
@@ -35,5 +36,9 @@ class WidthManipulator extends StatelessWidget{
 
   void _onDragUpdate(DragUpdateDetails details, StretchyBloc bloc){
     bloc.setWidth(sign*details.delta.dx);
+  }
+
+  void _onDragEnd(DragEndDetails details, StretchyBloc bloc){
+    bloc.endResize();
   }
 }

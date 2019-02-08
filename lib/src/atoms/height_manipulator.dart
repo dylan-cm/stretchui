@@ -14,6 +14,7 @@ class HeightManipulator extends StatelessWidget{
     final bloc = BlocProvider.of<StretchyBloc>(context);
     return GestureDetector(
       onVerticalDragUpdate: (details) => _onDragUpdate(details, bloc),
+      onVerticalDragEnd: (details) => _onDragEnd(details, bloc),
       child: Container(
         alignment: Alignment(0, 0),
         width: 44,
@@ -35,5 +36,9 @@ class HeightManipulator extends StatelessWidget{
 
   void _onDragUpdate(DragUpdateDetails details, StretchyBloc bloc){
     bloc.setHeight(sign*details.delta.dy);
+  }
+
+  void _onDragEnd(DragEndDetails details, StretchyBloc bloc){
+    bloc.endResize();
   }
 }

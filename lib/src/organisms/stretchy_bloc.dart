@@ -11,8 +11,8 @@ class StretchyBloc extends BlocBase{
   
   //Getters
   ValueObservable<Size> get sizeStream => _sizeSubject.stream;
-  double get width => math.sqrt( math.pow(sizeStream.value.width, 2) );
-  double get height => math.sqrt( math.pow(sizeStream.value.height, 2) );
+  double get width => _abs(sizeStream.value.width);
+  double get height => _abs(sizeStream.value.height);
   //Setters
   Function(double) get setWidth => (dx) {
     _sizeSubject.sink.add(
@@ -24,9 +24,19 @@ class StretchyBloc extends BlocBase{
       Size(sizeStream.value.width, sizeStream.value.height+dy*2)
     );
   };
+  Function() get endResize => (){
+    _sizeSubject.sink.add(
+      Size(
+        _abs(_sizeSubject.stream.value.width), 
+        _abs(_sizeSubject.stream.value.height) 
+      )
+    );
+  };
 
   void dispose() { 
     _sizeSubject.close();
     // _invertedSubject.close();
   }
+
+  double _abs(double value) => math.sqrt( math.pow(value, 2) );
 }
