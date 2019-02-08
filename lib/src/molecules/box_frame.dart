@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../atoms/size_manipulator.dart';
+import '../atoms/width_manipulator.dart';
+import '../atoms/height_manipulator.dart';
 
 class BoxFrame extends StatelessWidget {
   final double extPadding, intPadding, width, height;
@@ -28,28 +29,19 @@ class BoxFrame extends StatelessWidget {
         ),
         Positioned(
           top: -5,
-          child: SizeManipulator(color: color,),
+          child: HeightManipulator.top(color: color,),
         ),
         Positioned(
           right: -5,
-          child: RotatedBox(
-            quarterTurns: 1,
-            child: SizeManipulator(color: color,),
-          )
-        ),
-        Positioned(
-          left: -5,
-          child: RotatedBox(
-            quarterTurns: 3,
-            child: SizeManipulator(color: color,),
-          )
+          child: WidthManipulator.right(color: color,),
         ),
         Positioned(
           bottom: -5,
-          child: RotatedBox(
-            quarterTurns: 2,
-            child: SizeManipulator(color: color,),
-          )
+          child: HeightManipulator.bottom(color: color,),
+        ),
+        Positioned(
+          left: -5,
+          child: WidthManipulator.left(color: color,),
         ),
       ]
     );

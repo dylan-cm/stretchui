@@ -23,8 +23,6 @@ class _AppState extends State<App> {
           child: StretchyBox(
             extPadding:extPadding, 
             intPadding:intPadding,
-            width: width,
-            height: height,
           ),
         )
       )
