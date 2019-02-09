@@ -13,6 +13,7 @@ class ArtBloc extends BlocBase{
   ValueObservable<int> get selectedStream => _selectedSubject.stream;
   StretchyBox get stretchySelected => _stretchySubject.stream.value[_selectedSubject.stream.value];
   //Setters
+  //Move up and down stack render
   Function() get upStack => () {
     if(selectedStream.value < stretchyList.length-1) {
       _stretchySubject.sink.add(
@@ -21,7 +22,7 @@ class ArtBloc extends BlocBase{
         ..insert(selectedStream.value+2, stretchySelected)
         ..removeAt(selectedStream.value)
       );
-      _selectedSubject.sink.add(selectedStream.value+1);
+      selectStretchyAt(selectedStream.value+1);
     }
   };
   Function() get downStack => () {
@@ -32,7 +33,7 @@ class ArtBloc extends BlocBase{
         ..insert(selectedStream.value-1, stretchySelected)
         ..removeAt(selectedStream.value)
       );
-      _selectedSubject.sink.add(selectedStream.value-1);
+      selectStretchyAt(selectedStream.value-1);
     }
   };
   Function() get topStack => () {
@@ -43,7 +44,7 @@ class ArtBloc extends BlocBase{
         ..insert(stretchyList.length, stretchySelected)
         ..removeAt(selectedStream.value+1)
       );
-      _selectedSubject.sink.add(stretchyList.length-1);
+      selectStretchyAt(stretchyList.length-1);
     }
   };
   Function() get bottomStack => () {
@@ -54,11 +55,23 @@ class ArtBloc extends BlocBase{
         ..insert(0, stretchySelected)
         ..removeAt(selectedStream.value+1)
       );
-      _selectedSubject.sink.add(0);
+      selectStretchyAt(0);
     }
   };
   //addStretchy
+  Function() get addStretchy => (){
+     _stretchySubject.sink.add(
+      List<StretchyBox>()
+      ..addAll(stretchyList)
+      ..add(StretchyBox())
+     );
+     selectStretchyAt(stretchyList.length-1);
+  };
   //selectStretchy
+  Function(int) get selectStretchyAt => (index) => _selectedSubject.sink.add(index);
+  Function(Key) get selectStretchy => (key) {
+    _selectedSubject.sink.add( stretchyList.indexWhere( (stretchy)=> stretchy.key == key ) );
+  };
 
   @override
   void dispose() { 
