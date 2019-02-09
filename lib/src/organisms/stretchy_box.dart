@@ -25,36 +25,42 @@ class StretchyBox extends StatelessWidget{
         stream: bloc.paramStream,
         initialData: Param.start(),
         builder: (context, AsyncSnapshot<Param> snapshot){ 
-          return Stack(
-            alignment: AlignmentDirectional.center,
-            children: <Widget>[
-              Container(
-                alignment: AlignmentDirectional.center,
-                color: Theme.of(context).primaryColorLight,
-                padding: EdgeInsets.all(extPadding),
-                width: bloc.width*screen.width + extPadding*2,
-                height: bloc.height*screen.height + extPadding*2,
-                  child: Container(
-                  alignment: AlignmentDirectional.center,
-                  color: Theme.of(context).primaryColor,
-                  padding: EdgeInsets.all(intPadding),
-                  width: bloc.width*screen.width, 
-                  height: bloc.height*screen.height, 
-                  child: Container(
-                    alignment: AlignmentDirectional.center,
-                    color: Theme.of(context).primaryColorDark,
-                    //This is where a child would go instead 
-                  )
-                )
-              ),
-              BoxFrame(
-                width: bloc.width*screen.width, 
-                height: bloc.height*screen.height, 
-              ),
-            ]
-          );
+          return boxBuilder(bloc, screen, context);
         }
       )
+    );
+  }
+
+  Widget boxBuilder(StretchyBloc bloc, Size screen, BuildContext context){
+    return Positioned(
+      child: Stack(
+        alignment: AlignmentDirectional.center,
+        children: <Widget>[
+          Container(
+            alignment: AlignmentDirectional.center,
+            color: Theme.of(context).primaryColorLight,
+            padding: EdgeInsets.all(extPadding),
+            width: bloc.width*screen.width + extPadding*2,
+            height: bloc.height*screen.height + extPadding*2,
+              child: Container(
+              alignment: AlignmentDirectional.center,
+              color: Theme.of(context).primaryColor,
+              padding: EdgeInsets.all(intPadding),
+              width: bloc.width*screen.width, 
+              height: bloc.height*screen.height, 
+              child: Container(
+                alignment: AlignmentDirectional.center,
+                color: Theme.of(context).primaryColorDark,
+                //This is where a child would go instead 
+              )
+            )
+          ),
+          BoxFrame(
+            width: bloc.width*screen.width, 
+            height: bloc.height*screen.height, 
+          ),
+        ]
+      ),
     );
   }
 }

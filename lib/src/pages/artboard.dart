@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../organisms/stretchy_box.dart';
 import 'artboard_bloc.dart';
 import '../bloc_provider.dart';
 
