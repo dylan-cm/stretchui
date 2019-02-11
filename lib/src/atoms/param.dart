@@ -1,24 +1,37 @@
 import 'package:flutter/material.dart';
 
 class Param{
-  final double width, height, extPadding, intPadding;
+  final double width, height, extPadding, intPadding, x, y;
   final Color color;
   Param oldParam;
 
-  Param(this.width, this.height, this.extPadding, this.intPadding, this.color);
+  Param(
+    this.width, 
+    this.height, 
+    this.extPadding, 
+    this.intPadding, 
+    this.color,
+    this.x,
+    this.y
+  );
+
   Param.start({
     this.width:0.1, 
     this.height:0.1, 
     this.extPadding:0, 
     this.intPadding:0, 
-    this.color:Colors.white
+    this.color:Colors.white,
+    this.x:0.5,
+    this.y:0.5,
   });
 
   Param alter({
     double width, 
     double height, 
     double extPadding, 
-    double intPadding
+    double intPadding,
+    double x,
+    double y,
     }){
     return new Param(
       width ?? this.width, 
@@ -26,6 +39,8 @@ class Param{
       extPadding ?? this.extPadding, 
       intPadding ?? this.intPadding, 
       color ?? this.color,
+      x ?? this.x,
+      y ?? this.y,
     );
   }
 }
