@@ -11,7 +11,7 @@ class BoxFrame extends StatelessWidget {
     this.intPadding:0, 
     this.width:100, 
     this.height:100,
-    this.color:Colors.black87,
+    this.color:Colors.cyanAccent,
   });
 
   @override

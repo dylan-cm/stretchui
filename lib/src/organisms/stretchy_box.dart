@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import '../molecules/box_frame.dart';
 import 'stretchy_bloc.dart';
 import '../bloc_provider.dart';
+import '../pages/artboard_bloc.dart';
+import '../molecules/padding_frame.dart';
 
 class StretchyBox extends StatelessWidget{
   final double extPadding, intPadding;//, width, height;
   //TODO: add in parent widget with abstract class to pass in gesture detector
   //TODO: add in suppport for passing a child like an image, video, or button
   StretchyBox({
-    this.extPadding:0, 
-    this.intPadding:0, 
-    // this.width:100, 
-    // this.height:100,
+    this.extPadding:16, 
+    this.intPadding:16,
   });
 
   @override
@@ -44,9 +44,7 @@ class StretchyBox extends StatelessWidget{
               alignment: AlignmentDirectional.center,
               color: Theme.of(context).primaryColorLight,
               padding: EdgeInsets.all(extPadding),
-              width: bloc.width*screen.width + extPadding*2,
-              height: bloc.height*screen.height + extPadding*2,
-                child: Container(
+              child: Container(
                 alignment: AlignmentDirectional.center,
                 color: Theme.of(context).primaryColor,
                 padding: EdgeInsets.all(intPadding),
@@ -62,6 +60,12 @@ class StretchyBox extends StatelessWidget{
             BoxFrame(
               width: bloc.width*screen.width, 
               height: bloc.height*screen.height, 
+            ),
+            PaddingFrame(
+              width: bloc.width*screen.width,
+              height: bloc.height*screen.height,
+              intPadding: intPadding,
+              extPadding: extPadding
             ),
           ]
         ),
