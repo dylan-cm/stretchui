@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'artboard_bloc.dart';
 import '../bloc_provider.dart';
+import '../organisms/tool_chest.dart';
 
 class Artboard extends StatelessWidget {
   @override
@@ -9,14 +10,13 @@ class Artboard extends StatelessWidget {
     return BlocProvider(
       bloc: bloc,
       child: Scaffold(
-        body: Center(
-          child: StreamBuilder(
+        body: StreamBuilder(
             stream: bloc.stretchyStream,
             initialData: Stack(),
             builder: (context, snapshot){
+              bloc.addStretchy();
               return bloc.stretchyStack;
             },
-          )
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add_box),

@@ -42,7 +42,7 @@ class StretchyBox extends StatelessWidget{
           children: <Widget>[
             Container(
               alignment: AlignmentDirectional.center,
-              color: Theme.of(context).primaryColorLight,
+              color: Colors.transparent,
               padding: EdgeInsets.all(extPadding),
               child: Container(
                 alignment: AlignmentDirectional.center,
@@ -52,7 +52,7 @@ class StretchyBox extends StatelessWidget{
                 height: bloc.height*screen.height, 
                 child: Container(
                   alignment: AlignmentDirectional.center,
-                  color: Theme.of(context).primaryColorDark,
+                  color: Colors.transparent,
                   //TODO: This is where a child would go instead 
                 )
               )

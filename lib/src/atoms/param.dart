@@ -16,8 +16,8 @@ class Param{
   );
 
   Param.start({
-    this.width:0.1, 
-    this.height:0.1, 
+    this.width:0.25, 
+    this.height:0.25, 
     this.extPadding:0, 
     this.intPadding:0, 
     this.color:Colors.white,
