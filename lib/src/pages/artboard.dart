@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'artboard_bloc.dart';
 import '../bloc_provider.dart';
 import '../organisms/tool_chest.dart';
+import '../organisms/properties_panel.dart';
 
 class Artboard extends StatelessWidget {
   @override
@@ -13,6 +14,11 @@ class Artboard extends StatelessWidget {
       bloc: bloc,
       child: Stack(
         children: <Widget>[
+          PositionedDirectional(
+            end: 0,
+            top: 0,
+            child: PropPanel(),
+          ),
           PositionedDirectional(
             start: 0,
             bottom: 0,
