@@ -6,13 +6,16 @@ import '../organisms/stretchy_box.dart';
 class ArtBloc extends BlocBase{
   final _stretchySubject = BehaviorSubject<List<StretchyBox>>(seedValue: []);
   final _selectedSubject = BehaviorSubject<int>(seedValue: null);
+  final _sizeSubject = BehaviorSubject<Size>();
   //Getters
   ValueObservable<List<StretchyBox>> get stretchyStream => _stretchySubject.stream;
   List<StretchyBox> get stretchyList => _stretchySubject.stream.value;
   Stack get stretchyStack => Stack(children: stretchyList);
   ValueObservable<int> get selectedStream => _selectedSubject.stream;
   StretchyBox get stretchySelected => _stretchySubject.stream.value[_selectedSubject.stream.value];
+  Size get size => _sizeSubject.stream.value;
   //Setters
+  Function(Size) get setSize => (_size) => _sizeSubject.sink.add(_size);
   //Move up and down stack render
   Function() get upStack => () {
     if(selectedStream.value < stretchyList.length-1) {
@@ -77,5 +80,6 @@ class ArtBloc extends BlocBase{
   void dispose() { 
     _stretchySubject.close();
     _selectedSubject.close();
+    _sizeSubject.close();
   }
 }

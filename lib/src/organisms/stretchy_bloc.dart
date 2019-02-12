@@ -16,6 +16,8 @@ class StretchyBloc extends BlocBase{
   double get height => _abs(paramStream.value.height);
   double get x => paramStream.value.x;
   double get y => paramStream.value.y;
+  double get intPadding => paramStream.value.intPadding;
+  double get extPadding => paramStream.value.extPadding;
   //Setters
   Function(double) get setWidth => (dx) {
     //TODO: Fix bug where position jumps slightly when box flips

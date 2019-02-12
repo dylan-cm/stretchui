@@ -6,25 +6,21 @@ import '../pages/artboard_bloc.dart';
 import '../molecules/padding_frame.dart';
 
 class StretchyBox extends StatelessWidget{
-  final double extPadding, intPadding;//, width, height;
   //TODO: add in parent widget with abstract class to pass in gesture detector
   //TODO: add in suppport for passing a child like an image, video, or button
-  StretchyBox({
-    this.extPadding:16, 
-    this.intPadding:16,
-  });
+  StretchyBox();
 
   @override
   Widget build(BuildContext context) {
     final bloc = StretchyBloc();
-    final screen = MediaQuery.of(context).size;
+    final artboard = BlocProvider.of<ArtBloc>(context);
     return BlocProvider<StretchyBloc>(
       bloc: bloc,
       child: StreamBuilder<Param>(
         stream: bloc.paramStream,
         initialData: Param.start(),
         builder: (context, AsyncSnapshot<Param> snapshot){ 
-          return boxBuilder(bloc, screen, context);
+          return boxBuilder(bloc, artboard.size, context);
         }
       )
     );
@@ -36,18 +32,17 @@ class StretchyBox extends StatelessWidget{
       top: bloc.y*screen.height,
       child: GestureDetector(
         onPanUpdate: (DragUpdateDetails details) => _onDrag(bloc, details, screen),
-        // onVerticalDragUpdate: (DragUpdateDetails details) => _onDrag(bloc, details, screen),
-        child:  Stack(
+        child: Stack(
           alignment: AlignmentDirectional.center,
           children: <Widget>[
             Container(
               alignment: AlignmentDirectional.center,
               color: Colors.transparent,
-              padding: EdgeInsets.all(extPadding),
+              padding: EdgeInsets.all(bloc.extPadding),
               child: Container(
                 alignment: AlignmentDirectional.center,
                 color: Theme.of(context).primaryColor,
-                padding: EdgeInsets.all(intPadding),
+                padding: EdgeInsets.all(bloc.intPadding),
                 width: bloc.width*screen.width, 
                 height: bloc.height*screen.height, 
                 child: Container(
@@ -64,8 +59,8 @@ class StretchyBox extends StatelessWidget{
             PaddingFrame(
               width: bloc.width*screen.width,
               height: bloc.height*screen.height,
-              intPadding: intPadding,
-              extPadding: extPadding
+              intPadding: bloc.intPadding,
+              extPadding: bloc.extPadding
             ),
           ]
         ),

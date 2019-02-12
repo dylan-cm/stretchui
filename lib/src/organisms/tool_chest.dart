@@ -9,8 +9,8 @@ class ToolChest extends StatelessWidget {
     final bloc = BlocProvider.of<ArtBloc>(context);
     return Container(
       color: Colors.grey[900],
-      width: screen.width*.1,
-      height: screen.height,
+      width: screen.width*0.1,
+      height: screen.height*0.9,
       padding: EdgeInsets.all(4),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
