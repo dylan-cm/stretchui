@@ -9,19 +9,20 @@ class Artboard extends StatelessWidget {
     final bloc = ArtBloc();
     return BlocProvider(
       bloc: bloc,
-      child: Scaffold(
-        body: StreamBuilder(
-            stream: bloc.stretchyStream,
-            initialData: Stack(),
-            builder: (context, snapshot){
-              bloc.addStretchy();
-              return bloc.stretchyStack;
-            },
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add_box),
-          onPressed: bloc.addStretchy,
-        ),
+      child: Stack(
+        children: <Widget>[
+          BlocProvider(
+            bloc: bloc,
+            child: ToolChest()
+          ),
+          StreamBuilder(
+              stream: bloc.stretchyStream,
+              initialData: Stack(),
+              builder: (context, snapshot){
+                return bloc.stretchyStack;
+              },
+          ),
+        ],
       )
     );
   }

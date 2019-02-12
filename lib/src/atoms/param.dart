@@ -21,8 +21,8 @@ class Param{
     this.extPadding:0, 
     this.intPadding:0, 
     this.color:Colors.white,
-    this.x:0.5,
-    this.y:0.5,
+    this.x:0.5-0.25/2,
+    this.y:0.5-0.25/2,
   });
 
   Param alter({

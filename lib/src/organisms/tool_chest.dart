@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import '../bloc_provider.dart';
+import '../pages/artboard_bloc.dart';
 
 class ToolChest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
+    final bloc = BlocProvider.of<ArtBloc>(context);
     return Container(
       color: Colors.grey[900],
       width: screen.width*.1,
@@ -16,11 +19,11 @@ class ToolChest extends StatelessWidget {
             flex: 4,
             child: Container(),
           ),
-          RaisedButton(
-            onPressed: (){},
+          FlatButton(
+            onPressed: ()=>bloc.addStretchy(),
             child: Container(
               height: screen.width*.1,
-              child: Icon(Icons.add_box, size: 56,),
+              child: Icon(Icons.add_box, size: 56, color: Colors.white,),
             ),
           ),
           Expanded(
