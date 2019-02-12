@@ -20,7 +20,7 @@ class Param{
     this.height:0.25, 
     this.extPadding:0, 
     this.intPadding:0, 
-    this.color:Colors.white,
+    this.color:Colors.red,
     this.x:0.5-0.25/2,
     this.y:0.5-0.25/2,
   });

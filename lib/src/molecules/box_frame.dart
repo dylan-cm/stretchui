@@ -3,12 +3,10 @@ import '../atoms/width_manipulator.dart';
 import '../atoms/height_manipulator.dart';
 
 class BoxFrame extends StatelessWidget {
-  final double extPadding, intPadding, width, height;
+  final double width, height;
   final Color color;
   //TODO: implement padding manipulation
   BoxFrame({
-    this.extPadding:0, 
-    this.intPadding:0, 
     this.width:100, 
     this.height:100,
     this.color:Colors.cyanAccent,
@@ -21,8 +19,8 @@ class BoxFrame extends StatelessWidget {
       alignment: AlignmentDirectional.center,
       children: <Widget>[
         Container(
-          width: width+44,
-          height: height+44,
+          width: width,//+44,
+          height: height,//+44,
         ),
         Container(
           width: width,

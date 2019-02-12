@@ -66,7 +66,7 @@ class ArtBloc extends BlocBase{
      _stretchySubject.sink.add(
       List<StretchyBox>()
       ..addAll(stretchyList)
-      ..add(StretchyBox())
+      ..add(StretchyBox(id:stretchyList.length))
      );
      selectStretchyAt(stretchyList.length-1);
   };

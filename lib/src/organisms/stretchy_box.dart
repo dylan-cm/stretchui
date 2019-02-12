@@ -8,7 +8,8 @@ import '../molecules/padding_frame.dart';
 class StretchyBox extends StatelessWidget{
   //TODO: add in parent widget with abstract class to pass in gesture detector
   //TODO: add in suppport for passing a child like an image, video, or button
-  StretchyBox();
+  final int id;
+  StretchyBox({this.id:0});
 
   @override
   Widget build(BuildContext context) {
@@ -20,24 +21,27 @@ class StretchyBox extends StatelessWidget{
         stream: bloc.paramStream,
         initialData: Param.start(),
         builder: (context, AsyncSnapshot<Param> snapshot){ 
-          return boxBuilder(bloc, artboard.size, context);
+          return boxBuilder(bloc, artboard.size, context, artboard);
         }
       )
     );
   }
 
-  Widget boxBuilder(StretchyBloc bloc, Size screen, BuildContext context){
+  Widget boxBuilder(StretchyBloc bloc, Size screen, BuildContext context, ArtBloc artboard){
     return Positioned(
       left: bloc.x*screen.width,
       top: bloc.y*screen.height,
       child: GestureDetector(
         onPanUpdate: (DragUpdateDetails details) => _onDrag(bloc, details, screen),
+        onTap: () => artboard.selectStretchyAt(this.id),
         child: Stack(
           alignment: AlignmentDirectional.center,
           children: <Widget>[
             Container(
               alignment: AlignmentDirectional.center,
-              color: Colors.transparent,
+              color: Colors.red,
+              width: bloc.width*screen.width+bloc.extPadding*2, 
+              height: bloc.height*screen.height+bloc.extPadding*2,
               padding: EdgeInsets.all(bloc.extPadding),
               child: Container(
                 alignment: AlignmentDirectional.center,
@@ -52,6 +56,20 @@ class StretchyBox extends StatelessWidget{
                 )
               )
             ),
+            _buildFrame(artboard, bloc, screen),
+          ]
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFrame(ArtBloc artboard, StretchyBloc bloc, Size screen){
+    return StreamBuilder(
+      stream: artboard.selectedStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return artboard.stretchySelected.id==this.id ? Stack(
+          children: <Widget>[
+             
             BoxFrame(
               width: bloc.width*screen.width, 
               height: bloc.height*screen.height, 
@@ -62,9 +80,9 @@ class StretchyBox extends StatelessWidget{
               intPadding: bloc.intPadding,
               extPadding: bloc.extPadding
             ),
-          ]
-        ),
-      ),
+          ],
+        ) : Container();
+      },
     );
   }
 

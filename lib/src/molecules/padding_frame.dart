@@ -38,16 +38,16 @@ class _DashPathPainter extends CustomPainter {
       dashPath(
         Path()
         ..addRect(Rect.fromLTRB(
-        width/-2 - extPadding ,
-        height/-2 - extPadding, 
-        width/2 + extPadding ,
-        height/2 + extPadding,
+        0,
+        0, 
+        width+ extPadding ,
+        height + extPadding,
         ))
         ..addRect(Rect.fromLTRB(
-        width/-2 + intPadding ,
-        height/-2 + intPadding, 
-        width/2 - intPadding ,
-        height/2 - intPadding,
+        0,
+        0, 
+        width - intPadding ,
+        height - intPadding,
         )),
         dashArray: CircularIntervalList<double>(
           <double>[5.0, 5.0],
