@@ -104,28 +104,22 @@ class StretchyBloc extends BlocBase{
     );
   };
   Function(Offset) get updatePosition => (Offset offset) {
-    // //Set new positions to variables
-    // final double newX = offset.dx + x;
-    // final double newY = offset.dy + y;
-    // //Check to keep box on screen, if so update position
-    // if(0 <= newX && newX <= (screen.width*0.8) )
-    //   _paramSubject.sink.add(
-    //     paramStream.value.alter(
-    //       x: x+offset.dx
-    //     )
-    //   );
-    // if(0 <= newY && newY <= (screen.height*(1 - height)) )
-    //   _paramSubject.sink.add(
-    //     paramStream.value.alter(
-    //       y: y+offset.dy
-    //     )
-    //   );
-    _paramSubject.sink.add(
-      paramStream.value.alter(
-        x: x+offset.dx,
-        y: y+offset.dy
-      )
-    );
+    //Set new positions to variables
+    final double newX = offset.dx + x;
+    final double newY = offset.dy + y;
+    //Check to keep box on screen, if so update position
+    if(0 <= newX && newX <= (1-width) )
+      _paramSubject.sink.add(
+        paramStream.value.alter(
+          x: x+offset.dx
+        )
+      );
+    if(0 <= newY && newY <= (1 - height) )
+      _paramSubject.sink.add(
+        paramStream.value.alter(
+          y: y+offset.dy
+        )
+      );
   };
 
   @override
