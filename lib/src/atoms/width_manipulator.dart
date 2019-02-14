@@ -3,17 +3,17 @@ import '../bloc_provider.dart';
 import '../organisms/stretchy_bloc.dart';
 
 class WidthManipulator extends StatelessWidget{
-  const WidthManipulator.right({this.color = Colors.black87, this.sign = 1});
-  const WidthManipulator.left({this.color = Colors.black87, this.sign = -1});
+  const WidthManipulator.right({this.color = Colors.black87, this.right = true});
+  const WidthManipulator.left({this.color = Colors.black87, this.right = false});
 
   final Color color;
-  final int sign;
+  final bool right;
 
   @override
   Widget build(BuildContext context) {
     final StretchyBloc bloc = BlocProvider.of<StretchyBloc>(context);
     return GestureDetector(
-      onHorizontalDragUpdate: (DragUpdateDetails details) => _onDragUpdate(context, details, bloc),
+      onHorizontalDragUpdate: (DragUpdateDetails details) => _onDragUpdate(details, bloc),
       onHorizontalDragEnd: (DragEndDetails details)=> _onDragEnd(details, bloc),
       child: Container(
         alignment: AlignmentDirectional.center,
@@ -34,8 +34,8 @@ class WidthManipulator extends StatelessWidget{
     );
   }
 
-  void _onDragUpdate(BuildContext context, DragUpdateDetails details, StretchyBloc bloc){
-    bloc.setWidth(sign*details.delta.dx/MediaQuery.of(context).size.width);
+  void _onDragUpdate(DragUpdateDetails details, StretchyBloc bloc){
+    bloc.setWidth(details.delta.dx, right);
   }
 
   void _onDragEnd(DragEndDetails details, StretchyBloc bloc){
