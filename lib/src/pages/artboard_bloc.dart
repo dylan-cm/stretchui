@@ -5,7 +5,7 @@ import '../organisms/stretchy_box.dart';
 export '../organisms/stretchy_box.dart';
 
 class ArtBloc extends BlocBase{
-  final BehaviorSubject<List<StretchyBox>> _stretchySubject = BehaviorSubject<List<StretchyBox>>();
+  final BehaviorSubject<List<StretchyBox>> _stretchySubject = BehaviorSubject<List<StretchyBox>>(seedValue: <StretchyBox>[]);
   final BehaviorSubject<int> _selectedSubject = BehaviorSubject<int>(seedValue: null);
   final BehaviorSubject<Size> _sizeSubject = BehaviorSubject<Size>();
   //Getters
