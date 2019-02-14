@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import '../atoms/width_manipulator.dart';
 import '../atoms/height_manipulator.dart';
+import '../atoms/width_manipulator.dart';
 
 class BoxFrame extends StatelessWidget {
+  const BoxFrame({
+    this.width = 100, 
+    this.height = 100,
+    this.color = Colors.cyanAccent,
+  });
+
   final double width, height;
   final Color color;
   //TODO: implement padding manipulation
-  BoxFrame({
-    this.width:100, 
-    this.height:100,
-    this.color:Colors.cyanAccent,
-  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'artboard_bloc.dart';
 import '../bloc_provider.dart';
-import '../organisms/tool_chest.dart';
 import '../organisms/properties_panel.dart';
+import '../organisms/tool_chest.dart';
+import 'artboard_bloc.dart';
 
 class Artboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size screen = MediaQuery.of(context).size;
-    final bloc = ArtBloc();
-    bloc.setSize(screen*.9);
-    return BlocProvider(
+    final Size screen = MediaQuery.of(context).size;
+    final ArtBloc bloc = ArtBloc();
+    bloc.setSize(screen*0.9);
+    return BlocProvider<ArtBloc>(
       bloc: bloc,
       child: Stack(
         children: <Widget>[
@@ -22,10 +22,7 @@ class Artboard extends StatelessWidget {
           PositionedDirectional(
             start: 0,
             bottom: 0,
-            child: BlocProvider(
-              bloc: bloc,
-              child: ToolChest()
-            )
+            child: ToolChest()
           ),
           PositionedDirectional(
             end: 0,
@@ -34,10 +31,10 @@ class Artboard extends StatelessWidget {
               color: Colors.white,
               width: screen.width*.9,
               height: screen.height*.9,
-              child: StreamBuilder(
+              child: StreamBuilder<List<StretchyBox>>(
                 stream: bloc.stretchyStream,
-                initialData: Stack(),
-                builder: (context, snapshot){
+                initialData: const <StretchyBox>[],
+                builder: (BuildContext context, AsyncSnapshot<List<StretchyBox>> snapshot){
                   return bloc.stretchyStack;
                 },
               )

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:path_drawing/path_drawing.dart';
 
 class PaddingFrame extends StatelessWidget {
+  const PaddingFrame({this.width, this.height, this.intPadding, this.extPadding});
+
   final double width, height, intPadding, extPadding;
-  
-  PaddingFrame({this.width, this.height, this.intPadding, this.extPadding});
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, consraints){
+      builder: (BuildContext context, BoxConstraints consraints){
         return CustomPaint(
           painter: _DashPathPainter(
             width: width,
@@ -25,10 +25,10 @@ class PaddingFrame extends StatelessWidget {
 }
 
 class _DashPathPainter extends CustomPainter {
-  final double width, height, intPadding, extPadding;
-  
   _DashPathPainter({this.width, this.height, this.intPadding, this.extPadding});
 
+  final double width, height, intPadding, extPadding;
+  
   @override
   bool shouldRepaint(_DashPathPainter oldDelegate) => true;
 

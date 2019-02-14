@@ -5,20 +5,20 @@ import '../pages/artboard_bloc.dart';
 class ToolChest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size screen = MediaQuery.of(context).size;
-    final bloc = BlocProvider.of<ArtBloc>(context);
+    final Size screen = MediaQuery.of(context).size;
+    final ArtBloc bloc = BlocProvider.of<ArtBloc>(context);
     return Container(
       color: Colors.grey[900],
       width: screen.width*0.1,
       height: screen.height,
-      padding: EdgeInsets.all(4),
+      padding: const EdgeInsets.all(4),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: 
         <Widget>[
           Container(
             child: IconButton(
-              icon: Icon(Icons.remove_red_eye), 
+              icon: const Icon(Icons.remove_red_eye), 
               onPressed: (){},
             ),
             width: screen.width*0.1,
@@ -42,18 +42,18 @@ class ToolChest extends StatelessWidget {
   }
 
   List<Widget> _buildButton(IconData icon, VoidCallback onPressed, Size screen){
-    return [
+    return <Widget>[
       RaisedButton(
       color: Colors.grey[800],
       child: Container(
-        constraints: BoxConstraints(
+        constraints: const BoxConstraints(
           minHeight: 44,
           maxHeight: 78,
         ),
         height: screen.width*0.2,
         child: Icon(icon, size: screen.width*0.04)
       ),
-      padding: EdgeInsets.all(0),
+      padding: const EdgeInsets.all(0),
       onPressed: onPressed,
       ),
       Expanded(
