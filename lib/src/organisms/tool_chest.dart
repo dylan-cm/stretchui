@@ -6,7 +6,7 @@ class ToolChest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size screen = MediaQuery.of(context).size;
-    final ArtBloc bloc = BlocProvider.of<ArtBloc>(context);
+    final ArtboardBloc bloc = BlocProvider.of<ArtboardBloc>(context);
     return Container(
       color: Colors.grey[900],
       width: screen.width*0.1,

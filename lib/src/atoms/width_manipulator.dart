@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../bloc_provider.dart';
-import '../organisms/stretchy_bloc.dart';
+import '../pages/artboard_bloc.dart';
 
 class WidthManipulator extends StatelessWidget{
   const WidthManipulator.right({this.color = Colors.black87, this.right = true});
@@ -11,7 +11,7 @@ class WidthManipulator extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    final StretchyBloc bloc = BlocProvider.of<StretchyBloc>(context);
+    final ArtboardBloc bloc = BlocProvider.of<ArtboardBloc>(context);
     return GestureDetector(
       onHorizontalDragUpdate: (DragUpdateDetails details) => _onDragUpdate(details, bloc),
       onHorizontalDragEnd: (DragEndDetails details)=> _onDragEnd(details, bloc),
@@ -34,11 +34,9 @@ class WidthManipulator extends StatelessWidget{
     );
   }
 
-  void _onDragUpdate(DragUpdateDetails details, StretchyBloc bloc){
+  void _onDragUpdate(DragUpdateDetails details, ArtboardBloc bloc){
     bloc.setWidth(details.delta.dx, right);
   }
 
-  void _onDragEnd(DragEndDetails details, StretchyBloc bloc){
-    bloc.endResize();
-  }
+  void _onDragEnd(DragEndDetails details, ArtboardBloc bloc){}
 }
