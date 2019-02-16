@@ -8,18 +8,28 @@ class PropPanel extends StatelessWidget {
     final Size screen = MediaQuery.of(context).size;
     final ArtboardBloc bloc = BlocProvider.of<ArtboardBloc>(context);
     return Container(
-      alignment: AlignmentDirectional.center,
       width: screen.width*0.9,
       height: screen.height*.1,
       color: Colors.grey[900],
-      padding: const EdgeInsets.all(16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      padding: const EdgeInsets.only(top: 22),
+      child: Stack(
+      overflow: Overflow.visible,
+      alignment: AlignmentDirectional.center,
         children: <Widget>[
-          Expanded(flex: 8, child: Container()),
-          _buildDisplay(bloc, true),
-          _buildDisplay(bloc, false),
-          Expanded(flex: 8, child: Container()),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Expanded(flex: 8, child: Container()),
+              _buildDisplay(bloc, true),
+              Expanded(flex: 1, child: Container()),
+              _buildDisplay(bloc, false),
+              Expanded(flex: 8, child: Container()),
+            ],
+          ),
+          Positioned(
+            bottom: 0,
+            child: _buildSlider(bloc),
+          ),
         ],
       ),
     );
@@ -27,19 +37,47 @@ class PropPanel extends StatelessWidget {
 
   //Builder method for displaying x & y
   Widget _buildDisplay(ArtboardBloc bloc, bool isXAxis){
-  //   return StreamBuilder<List<StretchyModel>>(
-  //     stream: bloc.stretchyStream,
-  //     initialData: <StretchyModel>[StretchyModel.start()],
-  //     builder: (BuildContext context, AsyncSnapshot<List<StretchyModel>> snapshot){
-  //       if(snapshot.data != null){
-  //         final int value = ( isXAxis ? bloc.stretchySelected.x*100 : bloc.stretchySelected.y*100 ).floor();
-  //         return Text((isXAxis ? 'X' : 'Y' ) + ': $value');
-  //       }
-  //       else 
-  //         return Container();
-  //     },
-  //   );
-  // }
-  return Container();
+    return StreamBuilder<List<StretchyModel>>(
+      stream: bloc.stretchyStream,
+      builder: (BuildContext context, AsyncSnapshot<List<StretchyModel>> snapshot){
+        int value;
+        if(snapshot.hasData && bloc.selectedStream.value!=null)
+          value = ( isXAxis ? bloc.stretchySelected.x*100 : bloc.stretchySelected.y*100 ).floor();  
+        else 
+          value = 0;
+        return Text(
+          (isXAxis ? 'X' : 'Y' ) + ': $value',
+          style: Theme.of(context).textTheme.headline
+        );
+      },
+    );
+  }
+
+  Widget _buildSlider(ArtboardBloc bloc){
+    return StreamBuilder<List<StretchyModel>>(
+      stream: bloc.stretchyStream ,
+      builder: (BuildContext context, AsyncSnapshot<List<StretchyModel>> snapshot){
+        if(snapshot.hasData && bloc.selectedStream.value!=null){
+            return Container(
+              alignment: Alignment.center,
+              width: bloc.artboardSize.width,
+              child: Slider(
+                max: 1 - bloc.stretchySelected.width,
+                activeColor: Colors.white,
+                inactiveColor: Colors.white,
+                value: true ? bloc.stretchySelected.x : bloc.stretchySelected.y,
+                onChanged:(double value){
+                  bloc.updatePosition(Offset(
+                  true ? value - bloc.stretchySelected.x : 0, 
+                  true ? 0 : value - bloc.stretchySelected.y,
+                  ));
+                }
+              )
+            );
+        }
+        else 
+          return Container();
+      },
+    );
   }
 }

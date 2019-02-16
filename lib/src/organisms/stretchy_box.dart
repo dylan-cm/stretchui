@@ -17,7 +17,7 @@ class StretchyBox extends StatelessWidget{
       top: model.pixelY,
       child: GestureDetector(
         onTap: () => bloc.selectStretchyAt(model.id),
-        onPanStart: (DragStartDetails _) => bloc.selectStretchyAt(model.id),
+        onPanStart: (DragStartDetails details) => _onPanStart(bloc, details),
         child: Container(
           alignment: AlignmentDirectional.center,
           color: Colors.red,//TODO: for testing purposes only
@@ -40,4 +40,9 @@ class StretchyBox extends StatelessWidget{
       ),
     );
   }
+  void _onPanStart(ArtboardBloc bloc, DragStartDetails details){
+    bloc.selectStretchyAt(model.id);
+    //TODO: start moving immediately .then(updatePosition)
+  }
+      
 }

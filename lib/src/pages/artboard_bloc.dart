@@ -21,7 +21,7 @@ class ArtboardBloc extends BlocBase{
   ///Setters
   ///
   ///Set the size of the artboard
-  Function(Size) get setSize => (Size _size) => _artBoardsizeSubject.sink.add(_size);
+  Function(Size) get setArtboardSize => (Size _size) => _artBoardsizeSubject.sink.add(_size);
   ///Update dimension along x axis of StretchyBox
   Function(double, bool) get setWidth => (double dx, bool right) {
     //Convert change in pixels to change in points

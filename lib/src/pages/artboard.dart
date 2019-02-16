@@ -14,7 +14,7 @@ class Artboard extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size screen = MediaQuery.of(context).size;
     final ArtboardBloc bloc = ArtboardBloc();
-    bloc.setSize(screen*0.9);
+    bloc.setArtboardSize(screen*0.9);
     return BlocProvider<ArtboardBloc>(
       bloc: bloc,
       child: Stack(
