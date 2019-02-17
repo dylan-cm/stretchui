@@ -42,7 +42,7 @@ class PropPanel extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<List<StretchyModel>> snapshot){
         int value;
         if(snapshot.hasData && bloc.selectedStream.value!=null)
-          value = ( isXAxis ? bloc.stretchySelected.x*100 : bloc.stretchySelected.y*100 ).floor();  
+          value = ( isXAxis ? bloc.stretchySelected.x*1000 : bloc.stretchySelected.y*1000 ).floor();  
         else 
           value = 0;
         return Text(
@@ -54,10 +54,10 @@ class PropPanel extends StatelessWidget {
   }
 
   Widget _buildSlider(ArtboardBloc bloc){
-    return StreamBuilder<List<StretchyModel>>(
-      stream: bloc.stretchyStream ,
-      builder: (BuildContext context, AsyncSnapshot<List<StretchyModel>> snapshot){
-        if(snapshot.hasData && bloc.selectedStream.value!=null){
+    return StreamBuilder<StretchyModel>(
+      stream: bloc.propPanelStream,
+      builder: (BuildContext context, AsyncSnapshot<StretchyModel> snapshot){
+        if(snapshot.hasData){
             return Container(
               alignment: Alignment.center,
               width: bloc.artboardSize.width,
@@ -75,8 +75,17 @@ class PropPanel extends StatelessWidget {
               )
             );
         }
-        else 
-          return Container();
+        else {
+          return Container(
+            alignment: Alignment.center,
+            width: bloc.artboardSize.width,
+            child: Slider(
+              activeColor: Colors.white54,
+              value: 0.5,
+              onChanged: (_){},
+            )
+          );
+        }
       },
     );
   }

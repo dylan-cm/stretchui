@@ -17,6 +17,11 @@ class ArtboardBloc extends BlocBase{
   StretchyModel get stretchySelected => _stretchySubject.stream.value[_selectedSubject.stream.value];
   ValueObservable<Size> get artboardSizeStream => _artBoardsizeSubject.stream;
   Size get artboardSize => _artBoardsizeSubject.stream.value;
+  Stream<StretchyModel> get propPanelStream => 
+    Observable.combineLatest<dynamic, StretchyModel>(
+      <Stream<dynamic>>[stretchyStream, selectedStream], 
+      (List<dynamic> list) => stretchySelected//StretchyModel.start()//list[0].value[list[1].value]
+    );
   ///
   ///Setters
   ///
